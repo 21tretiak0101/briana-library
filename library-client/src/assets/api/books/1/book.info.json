@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "author": "author",
+  "title": "My Test Book",
+  "isbn": "978-3-16-148410-0",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "First Main Chapter",
+      "images": [
+        {
+          "id": 1,
+          "filename": "facebook.png"
+        },
+        {
+          "id": 2,
+          "filename": "instagram.png"
+        }
+      ],
+      "parts": [
+        {
+          "title": "Part 1",
+          "reference": "part1"
+        },
+        {
+          "title": "Part2",
+          "reference": "part2"
+        }
+      ]
+    }
+  ]
+}

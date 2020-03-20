@@ -1,0 +1,11 @@
+<p>reader-page works!</p>
+
+<div *ngIf="book">
+  <pre>{{book | json}}</pre>
+
+  <div *ngIf="chapterContent">
+    <div [innerHTML]="chapterContent | safeHtml"></div>
+  </div>
+
+  <button (click)="getChapterContent(1)">show chapter content</button>
+</div>

@@ -1,0 +1,8 @@
+<h4>main-page works!</h4>
+
+<div *ngIf="books">
+  <div *ngFor="let book of books">
+    <pre>{{book | json}}</pre>
+    <a [routerLink]="['/reader', book.id ]">Read book</a>
+  </div>
+</div>
