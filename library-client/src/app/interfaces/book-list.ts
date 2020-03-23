@@ -1,3 +1,3 @@
 export interface BookList {
-  ids: [number];
+  ids: number[];
 }

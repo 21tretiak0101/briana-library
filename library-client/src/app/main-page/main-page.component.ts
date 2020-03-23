@@ -1,39 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {BookService} from '../services/book.service';
-import {Book} from '../interfaces/book';
-import {BookList} from '../interfaces/book-list';
+import {ContentService} from '../services/content.service';
 
 @Component({
   selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  template: `
+    <div class="container text-justify mt-3" *ngIf="mainContent">
+      <div class="row">
+        <div class="col-md-8 col-md-12">
+          <div [innerHTML]="mainContent | safeHtml"></div>
+        </div>
+      </div>
+    </div>
+  `
 })
 export class MainPageComponent implements OnInit {
 
-  /**
-   * this component displays all books with description
-   */
+  public mainContent: string;
 
-  public books: [Book?] = [];
-
-  constructor(private bookService: BookService) {}
+  constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
-    this.getBookList();
-  }
-
-  getBookList(): void {
-    this.bookService.getAllBooks().subscribe(bookList => {
-      this.putAllBooksFromList(bookList);
-      console.log('bookList:', bookList);
+    this.contentService.getMainContent().subscribe( content => {
+      this.mainContent = content;
     })
-  }
-
-  putAllBooksFromList(list: BookList): void {
-    for(let id of list.ids) {
-      this.bookService.getBookInfoById(id).subscribe( book => {
-        this.books.unshift(book);
-      });
-    }
   }
 }

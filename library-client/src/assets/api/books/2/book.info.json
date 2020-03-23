@@ -1,0 +1,18 @@
+{
+  "id": 2,
+  "author": "author - 2 ",
+  "title": "Test book",
+  "isbn": "078-2-16-148710-0",
+  "content": [
+    {
+      "title": "Part 1",
+      "path": "part1.html",
+      "content": []
+    },
+    {
+      "title": "Part 2",
+      "path": "part2.html",
+      "content": []
+    }
+  ]
+}

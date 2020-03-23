@@ -20,7 +20,7 @@ export class BookService {
   }
 
   getAllBooks(): Observable<BookList> {
-    return this.http.get<BookList>(`${BOOKS_URL}/${this.BOOK_LIST}`)
+    return this.http.get<BookList>(`${BOOKS_URL}/${this.BOOK_LIST}`);
   }
 
 }
