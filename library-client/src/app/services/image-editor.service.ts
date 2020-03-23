@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BOOKS_URL} from '../../environments/environment';
+import {BOOKS_URL, STATIC_URL} from '../../environments/environment';
 import * as parser from 'angular-html-parser'
 
 @Injectable({
@@ -9,9 +9,11 @@ export class ImageEditorService {
 
   private REG_EXP: RegExp = /<myimg.*>/g;
 
+  private URL: string = STATIC_URL;
+
   constructor() {}
 
-  public replaceImages(bookId: number, content: string): string {
+  public replaceImages(content: string, bookId?: number): string {
 
     const myImages: string[] = content.match(this.REG_EXP);
 
@@ -23,7 +25,9 @@ export class ImageEditorService {
       const src: string = attrs[0]['value'];
       const style: string = attrs.length > 1 ? attrs[1]['value'] : '';
 
-      const path: string = `${BOOKS_URL}/${bookId}/сontent/${src}`;
+      if(bookId) this.URL = `${BOOKS_URL}/${bookId}`;
+
+      const path: string = `${this.URL}/${src}`;
       const realImg: string = `<img src="${path}" alt="${src}" style="${style}"/>`;
 
       content = content.replace(myImg, realImg);
