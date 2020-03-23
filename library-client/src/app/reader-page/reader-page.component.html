@@ -1,11 +1,41 @@
-<p>reader-page works!</p>
-
-<div *ngIf="book">
-  <pre>{{book | json}}</pre>
-
-  <div *ngIf="chapterContent">
-    <div [innerHTML]="chapterContent | safeHtml"></div>
+<div class="mt-5" id="header"></div>
+<div class="container-fluid mt-5" >
+  <div class="row">
+    <div class="col-lg-4 mb-3">
+      <div *ngIf="contentList">
+        <div class="card badge-light">
+          <div class="card-header h4" >{{book.title}}</div>
+          <div class="card-body table-responsive-xl">
+            <table class="table">
+              <ul class="section-nav text-muted">
+                <ng-template #recursiveList let-contentList>
+                  <li *ngFor="let item of contentList" class="toc-entry toc-h5">
+                    <a (click)="getContent(item)" [routerLink]="">{{item.title}}</a>
+                    <ul *ngIf="item.content.length > 0" class="section-nav">
+                      <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.content }"></ng-container>
+                    </ul>
+                  </li>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: contentList }"></ng-container>
+              </ul>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div *ngIf="content else notFound">
+        <div *ngIf="content" [innerHTML]="content | safeHtml"></div>
+      </div>
+    </div>
   </div>
-
-  <button (click)="getChapterContent(1)">show chapter content</button>
 </div>
+
+
+<ng-template #notFound>
+  <div class="h4 text-center text-muted mt-5">Файл не найден</div>
+</ng-template>
+
+
+
+

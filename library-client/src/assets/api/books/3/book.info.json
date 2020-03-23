@@ -1,0 +1,51 @@
+{
+  "id": 3,
+  "author": "author",
+  "title": "New book",
+  "isbn": "978-3-16-148410-0",
+  "content": [
+    {
+      "title": "Part 1",
+      "path": "part1.html",
+      "content": [
+        {
+          "title": "Chapter 1",
+          "path": "chapter1.1.html",
+          "content": []
+        },
+        {
+          "title": "Chapter 2",
+          "path": "chapter1.2.html",
+          "content": []
+        }
+      ]
+    },
+    {
+      "title": "Философское и идеологическое обоснование.\n(Государство, общество, страна)",
+      "path": "part2.html",
+      "content": [
+        {
+          "title": "Chapter 1",
+          "path": "chapter2.1.html",
+          "content": []
+        },
+        {
+          "title": "Chapter 2",
+          "path": "chapter2.2.html",
+          "content": []
+        },
+        {
+          "title": "Chapter 3",
+          "path": "chapter2.3.html",
+          "content": [
+            {
+              "title": "Философское и идеологическое обоснование.\n(Государство, общество, страна)Философское и идеологическое обоснование.\n(Государство, общество, страна)Философское и идеологическое обоснование.\n(Государство, общество, страна)",
+              "path": "paragraph2.3.1.html",
+              "content": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

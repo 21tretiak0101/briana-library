@@ -1,30 +1,38 @@
 {
   "id": 1,
   "author": "author",
-  "title": "My Test Book",
+  "title": "Проект государственной системы \"Союз\"",
   "isbn": "978-3-16-148410-0",
-  "chapters": [
+  "content": [
     {
-      "id": 1,
-      "title": "First Main Chapter",
-      "images": [
+      "title": "Глава 1. Страна.",
+      "path": "country.html",
+      "content": [
         {
-          "id": 1,
-          "filename": "facebook.png"
+          "title": "1.\tСоздание страны.",
+          "path": "creating.html",
+          "content": []
         },
         {
-          "id": 2,
-          "filename": "instagram.png"
+          "title": "2.\tИерархичность.",
+          "path": "hier.html",
+          "content": []
         }
-      ],
-      "parts": [
+      ]
+    },
+    {
+      "title": "Глава 2. Общество.",
+      "path": "society.html",
+      "content": [
         {
-          "title": "Part 1",
-          "reference": "part1"
+          "title": "1.\tКоммунистическая общественно-экономическая формация.",
+          "path": "formation.html",
+          "content": []
         },
         {
-          "title": "Part2",
-          "reference": "part2"
+          "title": "2.\tДемократический общественно-политический строй.",
+          "path": "democracy.html",
+          "content": []
         }
       ]
     }
