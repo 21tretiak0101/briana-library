@@ -23,13 +23,12 @@ export class ImageEditorService {
       const src: string = attrs[0]['value'];
       const style: string = attrs.length > 1 ? attrs[1]['value'] : '';
 
-      const path: string = `${BOOKS_URL}/${bookId}/images/${src}`;
+      const path: string = `${BOOKS_URL}/${bookId}/сontent/${src}`;
       const realImg: string = `<img src="${path}" alt="${src}" style="${style}"/>`;
 
       content = content.replace(myImg, realImg);
       console.log(realImg);
     });
-
 
     return content;
   }
