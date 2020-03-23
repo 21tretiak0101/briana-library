@@ -50,8 +50,8 @@ export class ReaderPageComponent implements OnInit {
 
   getContent(content: Content): void {
     this.pageTitle = content.title;
-    this.chapterService.getContent(this.bookID, content.path).subscribe( content => {
-      this.content = this.imageEditorService.replaceImages(this.bookID, content);
+    this.chapterService.getBookContent(this.bookID, content.path).subscribe( content => {
+      this.content = this.imageEditorService.replaceImages(content, this.bookID);
     })
   }
 

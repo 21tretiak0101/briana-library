@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {BOOKS_URL, CONTACTS_URL, MAIN_URL} from '../../environments/environment';
+import {Observable, Subject} from 'rxjs';
+
+import {BOOKS_URL, STATIC_URL} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,24 @@ export class ContentService {
 
   constructor(private http: HttpClient) { }
 
-  getContent(bookId: number, path: string): Observable<string>{
-    return this.http.get(`${BOOKS_URL}/${bookId}/content/${path}`,
+  private CONFIG_FILENAME: string = 'static.info.json';
+
+  getBookContent(bookId: number, path: string): Observable<string>{
+    return this.http.get(`${BOOKS_URL}/${bookId}/${path}`,
       {observe: 'body', responseType: 'text'})
   }
 
-  getContactsContent(): Observable<string> {
-    return this.http.get(CONTACTS_URL, {observe: 'body', responseType: 'text'});
-  }
+  getStaticContentByPageName(pageName: string): Observable<string> {
 
-  getMainContent(): Observable<string> {
-    return this.http.get(MAIN_URL, {observe: 'body', responseType: 'text'});
+    const subject: Subject<string> = new Subject<string>();
+
+    this.http.get(`${STATIC_URL}/${this.CONFIG_FILENAME}`).subscribe( config => {
+      this.http.get(`${STATIC_URL}/${config[pageName]}`, {observe: 'body', responseType: 'text'})
+        .subscribe( content => {
+          subject.next(content);
+        });
+    });
+
+    return subject.asObservable();
   }
 }

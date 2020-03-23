@@ -4,6 +4,5 @@ export const environment = {
 
 export const BOOKS_URL: string = 'assets/api/books';
 
-export const CONTACTS_URL: string = 'assets/api/static/contacts.html';
+export const STATIC_URL: string = 'assets/api/static';
 
-export const MAIN_URL: string = 'assets/api/static/main.html';

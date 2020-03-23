@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BOOKS_URL, STATIC_URL} from '../../environments/environment';
 import * as parser from 'angular-html-parser'
+
+import {BOOKS_URL, STATIC_URL} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

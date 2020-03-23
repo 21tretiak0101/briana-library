@@ -5,18 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SafeHtmlPipe} from './pipes/safe-html.pipe';
-import { MainPageComponent } from './main-page/main-page.component';
 import { ReaderPageComponent } from './reader-page/reader-page.component';
-import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { StaticPageComponent } from './static-page/static-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SafeHtmlPipe,
-    MainPageComponent,
     ReaderPageComponent,
-    ContactsPageComponent
+    StaticPageComponent
   ],
   imports: [
     BrowserModule,
