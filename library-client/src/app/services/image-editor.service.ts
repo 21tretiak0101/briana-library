@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 import {BOOKS_URL} from '../../environments/environment';
-import {ChapterService} from './chapter.service';
-import {Observable, Subject} from 'rxjs';
+import * as parser from 'angular-html-parser'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageEditorService {
 
-  constructor(private chapterService: ChapterService) { }
+  private REG_EXP: RegExp = /<myimg.*>/g;
 
-  private TEMPLATE : string = '<myimg></myimg>';
+  constructor() {}
 
-  public replaceImages(bookId: number, chapterId: number, content: string): Observable<string> {
+  public replaceImages(bookId: number, content: string): string {
 
-    const subject: Subject<string> = new Subject<string>();
+    const myImages: string[] = content.match(this.REG_EXP);
 
-    this.chapterService.getChapter(bookId, chapterId).subscribe(chapter => {
-      for(let img of chapter.images){
-        const path: string = `${BOOKS_URL}/${bookId}/chapters/${chapter.id}/images/${img.filename}`;
+    if (myImages === null || myImages.length === 0) return content;
 
-        const realImageTag: string = `<img src="${path}" alt="${img.filename}"/>`;
-        content = content.replace(this.TEMPLATE,realImageTag);
+    myImages.forEach( myImg => {
+      const attrs: string[] = parser.parse(myImg).rootNodes[0]['attrs'];
 
-        console.log(realImageTag);
-      }
-      subject.next(content);
+      const src: string = attrs[0]['value'];
+      const style: string = attrs.length > 1 ? attrs[1]['value'] : '';
+
+      const path: string = `${BOOKS_URL}/${bookId}/images/${src}`;
+      const realImg: string = `<img src="${path}" alt="${src}" style="${style}"/>`;
+
+      content = content.replace(myImg, realImg);
+      console.log(realImg);
     });
 
-    return subject.asObservable();
+
+    return content;
   }
 }
