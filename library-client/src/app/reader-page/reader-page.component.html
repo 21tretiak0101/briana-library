@@ -1,41 +1,72 @@
-<div class="mt-5" id="header"></div>
-<div class="container-fluid mt-5" >
-  <div class="row">
-    <div class="col-lg-4 mb-3">
-      <div *ngIf="contentList">
-        <div class="card badge-light">
-          <div class="card-header h4" >{{book.title}}</div>
-          <div class="card-body table-responsive-xl">
-            <table class="table">
-              <ul class="section-nav text-muted">
-                <ng-template #recursiveList let-contentList>
-                  <li *ngFor="let item of contentList" class="toc-entry toc-h5">
-                    <a (click)="getContent(item)" [routerLink]="">{{item.title}}</a>
-                    <ul *ngIf="item.content.length > 0" class="section-nav">
-                      <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.content }"></ng-container>
-                    </ul>
-                  </li>
-                </ng-template>
-                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: contentList }"></ng-container>
-              </ul>
-            </table>
-          </div>
-        </div>
-      </div>
+<nav class="navbar navbar-expand-lg col-lg-3 d-none d-lg-block bg-transparent sidebar">
+  <div class="sidebar-sticky"  id="leftMenu">
+    <div class="container" *ngIf="book">
+      <h6>{{book.title}}</h6>
     </div>
-    <div class="col-lg-6">
-      <div *ngIf="content else notFound">
-        <div *ngIf="content" [innerHTML]="content | safeHtml"></div>
-      </div>
+    <ng-container *ngTemplateOutlet="sidebar"></ng-container>
+  </div>
+</nav>
+
+<div class="container mb-5 d-block d-lg-none">
+  <div class="card bg-transparent">
+    <div class="card-header" *ngIf="book">
+      <h6>{{book.title}}</h6>
+    </div>
+    <div class="card-body">
+      <ng-container *ngTemplateOutlet="sidebar"></ng-container>
     </div>
   </div>
 </div>
 
-
-<ng-template #notFound>
-  <div class="h4 text-center text-muted mt-5">Файл не найден</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-0 col-lg-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-0 col-lg-4"></div>
+    <div class="col-12 col-lg-7 ">
+      <section  id="nav-scroll"></section>
+      <div *ngIf="content else notFound">
+        <div class="text-justify" [innerHTML]="content | safeHtml"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-0 col-lg-4"></div>
+    <div class="col-12 col-lg-7 text-center" *ngIf="contentList">
+      <a [routerLink]="['/reader', bookId, next]" [class.disabled]="!next">Назад</a>
+      <a [routerLink]="['/reader', bookId, previous]" class="ml-5" [class.disabled]="!previous">Вперёд</a>
+    </div>
+  </div>
+</div>
+<ng-template #sidebar>
+  <div class="" *ngIf="contentList" >
+    <ul class="section-nav text-muted nav flex-column">
+      <ng-template #recursiveList let-contentList>
+        <li *ngFor="let item of contentList" class="toc-entry toc-h5 nav-item mt-1 ml-2">
+          <a [routerLinkActive]="'active-link'" [routerLink]="['/reader/', bookId, item.path]" class="" >
+            <!--svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" class="feather feather-file-text">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <!--svg-->
+            {{item.title}}</a>
+          <ul *ngIf="item.content.length > 0" class="section-nav nav flex-column">
+            <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.content }"></ng-container>
+          </ul>
+        </li>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: contentList }"></ng-container>
+    </ul>
+  </div>
 </ng-template>
 
-
-
-
+<ng-template #notFound>
+  <div class="h4 text-center text-muted mt-3 mb-4">Файл не найден</div>
+</ng-template>
