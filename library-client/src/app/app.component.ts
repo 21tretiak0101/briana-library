@@ -1,8 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {NgAnimateScrollService} from 'ng-animate-scroll';
+import {interval} from 'rxjs';
+declare var $: any;
+const secondsCounter = interval(1000);
+
+
 import {BookService} from './services/book.service';
 import {Book} from './interfaces/book';
 import {BookList} from './interfaces/book-list';
-import {NgAnimateScrollService} from 'ng-animate-scroll';
+
 
 @Component({
   selector: 'app-root',
@@ -11,29 +17,25 @@ import {NgAnimateScrollService} from 'ng-animate-scroll';
 })
 export class AppComponent implements OnInit{
 
-  /**
-   * this component displays all books with description
-   */
-
   public books: Book[] = [];
 
   constructor(private bookService: BookService,
               private animate: NgAnimateScrollService) { }
 
   ngOnInit(): void {
+    this.addPopoverSupport();
     this.getBookList();
   }
 
   getBookList(): void {
     this.bookService.getAllBooks().subscribe(bookList => {
       this.putAllBooksFromList(bookList);
-      console.log('bookList:', bookList);
     })
   }
 
   putAllBooksFromList(list: BookList): void {
     for(let id of list.ids) {
-      this.bookService.getBookInfoById(id).subscribe( book => {
+      this.bookService.getBookById(id).subscribe(book => {
         this.books.push(book);
       });
     }
@@ -41,5 +43,11 @@ export class AppComponent implements OnInit{
 
   navigateToHeader(): void {
     this.animate.scrollToElement('nav-scroll');
+  }
+
+  public addPopoverSupport(): void {
+    secondsCounter.subscribe( () => {
+      $('[data-toggle="popover"]').popover();
+    });
   }
 }

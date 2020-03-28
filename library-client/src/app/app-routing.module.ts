@@ -5,9 +5,10 @@ import {StaticPageComponent} from './static-page/static-page.component';
 
 
 const routes: Routes = [
-  {path: 'main', component: StaticPageComponent},
-  {path: 'reader/:id', component: ReaderPageComponent},
-  {path: 'contacts', component: StaticPageComponent},
+  { path: 'main', component: StaticPageComponent},
+  { path: 'reader/:id', component: ReaderPageComponent},
+  { path: 'reader/:id/:path', component: ReaderPageComponent},
+  { path: 'contacts', component: StaticPageComponent},
   { path: '', redirectTo: '/main', pathMatch: 'full'},
   { path: '**', redirectTo: '/main'}
 ];

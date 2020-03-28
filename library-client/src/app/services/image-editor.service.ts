@@ -32,7 +32,6 @@ export class ImageEditorService {
       const realImg: string = `<img src="${path}" alt="${src}" style="${style}"/>`;
 
       content = content.replace(myImg, realImg);
-      console.log(realImg);
     });
 
     return content;

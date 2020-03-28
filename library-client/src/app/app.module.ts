@@ -20,8 +20,7 @@ import { StaticPageComponent } from './static-page/static-page.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ScrollingModule
-
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,7 +26,6 @@ export class StaticPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.url.subscribe( value => {
       this.getStaticContentByPageName(value[0].path);
-      console.log(value[0].path);
     })
   }
 
