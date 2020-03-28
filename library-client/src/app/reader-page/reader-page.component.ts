@@ -7,7 +7,10 @@ import {Book} from '../interfaces/book';
 import {ContentService} from '../services/content.service';
 import {ImageEditorService} from '../services/image-editor.service';
 import {Content} from '../interfaces/content';
-import {LinkService} from '../services/link.service';
+import {PageViewer} from '../services/page-viewer';
+import {Title} from '@angular/platform-browser';
+
+
 
 
 @Component({
@@ -25,13 +28,15 @@ export class ReaderPageComponent implements OnInit {
   public next: string;
   public previous: string;
 
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private bookService: BookService,
               private chapterService: ContentService,
               private imageEditorService: ImageEditorService,
               private animate: NgAnimateScrollService,
-              private linkService: LinkService) { }
+              private pageViewerService: PageViewer,
+              private titleService: Title ) { }
 
   ngOnInit(): void {
     this.initializeBook();
@@ -58,6 +63,7 @@ export class ReaderPageComponent implements OnInit {
   private getContent(path: string): void {
     this.chapterService.getBookContent(this.bookId, path).subscribe(content => {
       this.content = this.imageEditorService.replaceImages(content, this.bookId);
+      this.setTitle();
       this.navigateToHeader();
     });
   }
@@ -67,8 +73,13 @@ export class ReaderPageComponent implements OnInit {
   }
 
   setNextAndPreviousLinks(path: string): void {
-    this.next = this.linkService.getPreviousLink(this.contentList, path);
-    this.previous = this.linkService.getNextLink(this.contentList, path)
+    this.next = this.pageViewerService.getPreviousLink(this.contentList, path);
+    this.previous = this.pageViewerService.getNextLink(this.contentList, path)
+  }
+
+  public setTitle() {
+    const newTitle = this.pageViewerService.getPageTitleByPath(this.path);
+    this.titleService.setTitle( newTitle );
   }
 }
 

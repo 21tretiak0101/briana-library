@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import {Content} from '../interfaces/content';
 
+export interface BookTitle {
+  title: string;
+  path: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class LinkService {
+export class PageViewer {
 
   private linkList: string[];
+  private bookTitles: BookTitle[] = [];
 
   constructor() { }
 
@@ -23,9 +29,10 @@ export class LinkService {
   }
 
   private setLinkList(contentList: Content[]): void {
-    for(let content of contentList) {
-      this.linkList.push(content.path);
-      if(content.content.length > 0) this.setLinkList(content.content);
+    for(let c of contentList) {
+      this.linkList.push(c.path);
+      this.bookTitles.push({title: c.title, path: c.path})
+      if(c.content) this.setLinkList(c.content);
     }
   }
 
@@ -50,4 +57,13 @@ export class LinkService {
     }
     return '';
   }
+
+  getPageTitleByPath(path): string {
+    let title: string = '';
+    this.bookTitles.forEach( t => {
+      if(t.path === path) title = t.title
+    });
+    return title;
+  }
+
 }
