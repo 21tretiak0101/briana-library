@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import {ReaderPageComponent} from './reader-page/reader-page.component';
 import {StaticPageComponent} from './static-page/static-page.component';
-
 
 const routes: Routes = [
   { path: 'main', component: StaticPageComponent},

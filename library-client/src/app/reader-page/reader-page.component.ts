@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgAnimateScrollService} from 'ng-animate-scroll';
+import {Title} from '@angular/platform-browser';
 
 import {BookService} from '../services/book.service';
 import {Book} from '../interfaces/book';
@@ -8,10 +9,6 @@ import {ContentService} from '../services/content.service';
 import {ImageEditorService} from '../services/image-editor.service';
 import {Content} from '../interfaces/content';
 import {PageViewer} from '../services/page-viewer';
-import {Title} from '@angular/platform-browser';
-
-
-
 
 @Component({
   selector: 'app-reader-page',

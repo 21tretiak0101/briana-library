@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg col-lg-3 d-none d-lg-block bg-primary sidebar">
+<nav class="navbar navbar-expand-lg col-lg-3 d-none d-lg-block bg-transparent sidebar">
   <div class="sidebar-sticky"  id="leftMenu">
     <div class="container" *ngIf="book">
       <h6>{{book.title}}</h6>
@@ -6,7 +6,6 @@
     <ng-container *ngTemplateOutlet="sidebar"></ng-container>
   </div>
 </nav>
-
 <div class="container mb-5 d-block d-lg-none">
   <div class="card bg-transparent">
     <div class="card-header" *ngIf="book">
@@ -17,7 +16,6 @@
     </div>
   </div>
 </div>
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-0 col-lg-3"></div>
@@ -66,7 +64,7 @@
     </ul>
   </div>
 </ng-template>
-
 <ng-template #notFound>
   <div class="h4 text-center text-muted mt-3 mb-4">Файл не найден</div>
 </ng-template>
+

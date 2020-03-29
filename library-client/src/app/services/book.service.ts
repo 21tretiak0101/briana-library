@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+
 import {Book} from '../interfaces/book';
 import {BOOKS_URL} from '../../environments/environment';
 import {BookList} from '../interfaces/book-list';
@@ -22,5 +23,4 @@ export class BookService {
   getAllBooks(): Observable<BookList> {
     return this.http.get<BookList>(`${BOOKS_URL}/${this.BOOK_LIST}`);
   }
-
 }

@@ -1,40 +1,13 @@
 {
   "id": 1,
   "author": "author",
-  "title": "Проект государственной системы \"Союз\"",
-  "isbn": "978-3-16-148410-0",
+  "title": "title",
+  "isbn": "isbn",
   "content": [
     {
-      "title": "Глава 1. Страна.",
-      "path": "country.html",
-      "content": [
-        {
-          "title": "1.\tСоздание страны.",
-          "path": "creating.html",
-          "content": []
-        },
-        {
-          "title": "2.\tИерархичность.",
-          "path": "hier.html",
-          "content": []
-        }
-      ]
-    },
-    {
-      "title": "Глава 2. Общество.",
-      "path": "society.html",
-      "content": [
-        {
-          "title": "1.\tКоммунистическая общественно-экономическая формация.",
-          "path": "formation.html",
-          "content": []
-        },
-        {
-          "title": "2.\tДемократический общественно-политический строй.",
-          "path": "democracy.html",
-          "content": []
-        }
-      ]
+      "title": "title",
+      "path": "path",
+      "content": []
     }
   ]
 }

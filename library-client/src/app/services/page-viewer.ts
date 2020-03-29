@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import {Content} from '../interfaces/content';
 
 export interface BookTitle {
@@ -65,5 +66,4 @@ export class PageViewer {
     });
     return title;
   }
-
 }

@@ -34,7 +34,6 @@ export class ContentService {
     return subject.asObservable();
   }
 
-
   get staticTitle(): string {
     return this._staticTitle;
   }

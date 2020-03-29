@@ -8,7 +8,6 @@ const secondsCounter = interval(1000);
 import {BookService} from './services/book.service';
 import {Book} from './interfaces/book';
 import {BookList} from './interfaces/book-list';
-import {Title} from '@angular/platform-browser';
 
 
 @Component({

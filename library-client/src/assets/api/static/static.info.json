@@ -1,10 +1,10 @@
 {
   "main": {
-    "path": "main.html",
-    "title": "Main"
+    "path": "path",
+    "title": "title"
   },
   "contacts": {
-    "path": "contacts.html",
-    "title": "Contacts"
+    "path": "path",
+    "title": "title"
   }
 }

@@ -15,7 +15,7 @@
   overflow-y: scroll;
 }
 
-.card-body::-webkit-scrollbar  {
+.card-body::-webkit-scrollbar {
   width: 0;
 }
 
@@ -34,9 +34,7 @@
   color: grey;
 }
 
-a.disabled {
+a.disabled  {
   pointer-events: none;
   color: #ccc;
 }
-
-

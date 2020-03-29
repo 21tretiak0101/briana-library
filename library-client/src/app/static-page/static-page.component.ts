@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ContentService} from '../services/content.service';
 import {ActivatedRoute} from '@angular/router';
-import {ImageEditorService} from '../services/image-editor.service';
 import {Title} from '@angular/platform-browser';
+
+import {ContentService} from '../services/content.service';
+import {ImageEditorService} from '../services/image-editor.service';
 
 @Component({
   selector: 'app-static-page',
