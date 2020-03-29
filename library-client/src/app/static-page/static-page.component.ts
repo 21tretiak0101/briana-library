@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ContentService} from '../services/content.service';
 import {ActivatedRoute} from '@angular/router';
 import {ImageEditorService} from '../services/image-editor.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-static-page',
@@ -21,7 +22,8 @@ export class StaticPageComponent implements OnInit {
 
   constructor(private contentService: ContentService,
               private route: ActivatedRoute,
-              private imageEditorService: ImageEditorService) { }
+              private imageEditorService: ImageEditorService,
+              private titleService: Title ) { }
 
   ngOnInit(): void {
     this.route.url.subscribe( value => {
@@ -32,6 +34,12 @@ export class StaticPageComponent implements OnInit {
   getStaticContentByPageName(pageName: string): void {
     this.contentService.getStaticContentByPageName(pageName).subscribe( content => {
       this.pageContent = this.imageEditorService.replaceImages(content);
+      this.setTitle();
     })
+  }
+
+  public setTitle() {
+    const newTitle = this.contentService.staticTitle;
+    this.titleService.setTitle( newTitle );
   }
 }

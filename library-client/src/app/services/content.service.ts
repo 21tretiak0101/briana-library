@@ -12,6 +12,7 @@ export class ContentService {
   constructor(private http: HttpClient) { }
 
   private CONFIG_FILENAME: string = 'static.info.json';
+  private _staticTitle = '';
 
   getBookContent(bookId: number, path: string): Observable<string>{
     return this.http.get(`${BOOKS_URL}/${bookId}/${path}`,
@@ -23,12 +24,18 @@ export class ContentService {
     const subject: Subject<string> = new Subject<string>();
 
     this.http.get(`${STATIC_URL}/${this.CONFIG_FILENAME}`).subscribe( config => {
-      this.http.get(`${STATIC_URL}/${config[pageName]}`, {observe: 'body', responseType: 'text'})
+      this._staticTitle = config[pageName]['title'];
+      this.http.get(`${STATIC_URL}/${config[pageName]['path']}`, {observe: 'body', responseType: 'text'})
         .subscribe( content => {
           subject.next(content);
         });
     });
 
     return subject.asObservable();
+  }
+
+
+  get staticTitle(): string {
+    return this._staticTitle;
   }
 }
