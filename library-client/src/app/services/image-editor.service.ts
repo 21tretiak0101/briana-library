@@ -7,8 +7,11 @@ import {BOOKS_URL, STATIC_URL} from '../../environments/environment';
   providedIn: 'root'
 })
 export class ImageEditorService {
-
-  private REG_EXP: RegExp = /<myimg.*>/g;
+  /**
+   * This service works with content images.
+   * It replaces all relative paths with absolute ones
+   */
+  private REG_EXP: RegExp = /<img.*>/g;
 
   private URL: string = STATIC_URL;
 
@@ -16,12 +19,12 @@ export class ImageEditorService {
 
   public replaceImages(content: string, bookId?: number): string {
 
-    const myImages: string[] = content.match(this.REG_EXP);
+    const oldImages: string[] = content.match(this.REG_EXP);
 
-    if (myImages === null || myImages.length === 0) return content;
+    if (oldImages === null || oldImages.length === 0) return content;
 
-    myImages.forEach( myImg => {
-      const attrs: string[] = parser.parse(myImg).rootNodes[0]['attrs'];
+    oldImages.forEach( oldImg => {
+      const attrs: string[] = parser.parse(oldImg).rootNodes[0]['attrs'];
 
       const src: string = attrs[0]['value'];
       const style: string = attrs.length > 1 ? attrs[1]['value'] : '';
@@ -29,9 +32,9 @@ export class ImageEditorService {
       if(bookId) this.URL = `${BOOKS_URL}/${bookId}`;
 
       const path: string = `${this.URL}/${src}`;
-      const realImg: string = `<img src="${path}" alt="${src}" style="${style}"/>`;
+      const newImg: string = `<img src="${path}" alt="${src}" style="${style}">`;
 
-      content = content.replace(myImg, realImg);
+      content = content.replace(oldImg, newImg);
     });
 
     return content;
