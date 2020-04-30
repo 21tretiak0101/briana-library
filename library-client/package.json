@@ -26,7 +26,7 @@
     "angular-html-parser": "^1.4.0",
     "angular-scroll": "^1.0.2",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-mousewheel": "^3.1.13",
     "jscrollpane": "^2.2.1",
     "ng-animate-scroll": "^7.1.0",
